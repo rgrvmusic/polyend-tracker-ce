@@ -3,6 +3,9 @@
 
 #include "PolySynth/sdk/InstrumentTypeRegistry.h"
 #include "engines/ChiptuneSynthVoice.h"
+#ifdef PLATFORM_IMX
+#include "engines/ts_loader/TsLoaderVoice.h"
+#endif
 
 namespace polysynth
 {
@@ -33,6 +36,10 @@ void InstrumentTypeRegistry::registerInstrumentTypes(
     // Open-Source Custom Synth Engines
     registry.addInstrumentType(static_cast<int>(InstrumentTypeId::kChiptuneSynth),
                                createChiptuneSynth());
+#ifdef PLATFORM_IMX
+    registry.addInstrumentType(static_cast<int>(InstrumentTypeId::kTsLoader),
+                               createTsLoader());
+#endif
 }
 
 } // namespace polysynth
